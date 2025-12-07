@@ -1,17 +1,16 @@
 #include "push_swap.h"
+#include <limits.h>
 
-int free_all(t_stack *a, t_stack *b)
+int free_all(t_stack *a, t_stack *b, int check)
 {
     t_node  *temp;
     t_node  *current;
 
     current = a->head;
-    printf("hi");
     while (current)
     {
         temp = current;
         current = current->next;
-        printf("ui");
         free(temp);
     }
     free(a);
@@ -23,6 +22,8 @@ int free_all(t_stack *a, t_stack *b)
         free(temp);
     }
     free(b);
+    if(check == -1)
+    	printf("Error\n");
     return (0);
 }
 
@@ -34,7 +35,7 @@ int	ft_isdigit(int c)
 	return (0);
 }
 
-float	ft_atoi(char *str)
+long	ft_atoi(char *str)
 {
 	int		i;
 	int		sign;
@@ -43,9 +44,8 @@ float	ft_atoi(char *str)
 	i = 0;
 	sign = 1;
 	result = 0;
-    if(!str || str[0] == '\0')
-        return (1.1);
-    // printf("string is %s\n",str);
+    	if(!str || str[0] == '\0')
+        	return (LONG_MAX);
 	if (str[i] == '-')
 	{
 		sign = -1;
@@ -57,11 +57,10 @@ float	ft_atoi(char *str)
 		result += str[i] - '0';
 		i++;
 	}
-    if(str[i] != '\0')
-    {
-        // printf("hellp");
-            return (0);
-    }
+    	if(str[i] != '\0' || result * -1 < INT_MIN)
+    		return(LONG_MAX);
+	else if (result * sign > INT_MAX)
+		return (LONG_MAX);
 	return (result * sign);
 }
 
@@ -83,21 +82,19 @@ void        push_a(t_stack *a,t_node *node)
 
 int create_a(t_stack *a, char **list, int index)
 {
-    int     num;
+    long     num;
     t_node *node; 
     
     while(index > 0)
     {
         num = ft_atoi(list[index]);
-        // printf("%d %d\n",num,num == 0);
-        if(num == 0)
+        if(num == LONG_MAX)
             return (-1);
         node = malloc(sizeof(t_node));
         node -> value = num;
         node -> next = NULL;
         push_a(a,node);
         index--;
-        free(node);
     }
     return (1);
 }
@@ -113,16 +110,18 @@ int main(int argc, char **argv)
     t_stack *b = malloc(sizeof(t_stack));
     b->head = NULL;
     b->tail = NULL;
-    printf("hi%d\n",argc);
+   // printf("%d\n",argc);
 
     if(create_a(a,argv,argc-1) == -1)
-        return (free_all(a,b));
-    
-    // while (a->head)
-    // {
-    //     printf("stack a values: %d\n",a->head->value);
-    //     a->head = a->head->next;
-    // }
+        return (free_all(a,b,-1));
+    t_node *temp = a->head;
+     while (temp)
+     {
+         printf("stack a values: %d\n",temp->value);
+         temp = temp->next;
+     }
     printf("size %d",a->size);
-
+    //free(a);
+    //free(b);
+    free_all(a,b,1);
 }
