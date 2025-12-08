@@ -80,11 +80,11 @@ void        push_a(t_stack *a,t_node *node)
     }
 }
 
-int create_a(t_stack *a, char **list, int index)
+int	create_a(t_stack *a, char **list, int index)
 {
-    long     num;
-    t_node *node; 
-    
+    long	num;
+    t_node	*node;
+
     while(index > 0)
     {
         num = ft_atoi(list[index]);
@@ -99,28 +99,45 @@ int create_a(t_stack *a, char **list, int index)
     return (1);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-    if(argc == 1)
-        return (-1);
-    t_stack *a = malloc(sizeof(t_stack));
-    a->head = NULL;
-    a->tail = NULL;
-    a->size = 0;
-    t_stack *b = malloc(sizeof(t_stack));
-    b->head = NULL;
-    b->tail = NULL;
-   // printf("%d\n",argc);
+	if(argc == 1)
+        	return (-1);
+	t_stack *a = malloc(sizeof(t_stack));
+    	a->head = NULL;
+    	a->tail = NULL;
+    	a->size = 0;
+    	t_stack *b = malloc(sizeof(t_stack));
+    	b->head = NULL;
+    	b->tail = NULL;
+	b->size = 0;
+	if(create_a(a,argv,argc-1) == -1)
+        	return (free_all(a,b,-1));
 
-    if(create_a(a,argv,argc-1) == -1)
-        return (free_all(a,b,-1));
-    t_node *temp = a->head;
-     while (temp)
-     {
-         printf("stack a values: %d\n",temp->value);
-         temp = temp->next;
-     }
-    printf("size %d",a->size);
+	pp(b,a);
+	pp(b,a);
+	pp(b,a);
+	ss(b,a);
+	//swap(a);
+	t_node *temp = a->head;
+     	while (temp)
+     	{
+        	 printf("stack a values: %d\n",temp->value);
+        	 temp = temp->next;
+	}
+	temp = b->head;
+     	while (temp)
+     	{
+        	 printf("stack a values: %d\n",temp->value);
+        	 temp = temp->next;
+	}
+
+	//ss(a,b);
+
+	//if(a->tail != NULL)
+   		printf("size %d\n",a->size);
+	//if(a->head != NULL)
+		printf("size %d",b->size);
     //free(a);
     //free(b);
     free_all(a,b,1);
