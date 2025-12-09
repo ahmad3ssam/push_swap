@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+# include <limits.h>
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -26,7 +27,7 @@ int		ft_isprint(int c);
 int		ft_toupper(int c);
 int		ft_tolower(int c);
 
-int		ft_atoi(const char *str);
+long		ft_atoi(char *str);
 char	*ft_itoa(int nbr);
 
 void	ft_putnbr_fd(int nb, int fd);

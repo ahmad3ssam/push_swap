@@ -1,5 +1,4 @@
 #include "push_swap.h"
-#include <limits.h>
 
 int free_all(t_stack *a, t_stack *b, int check)
 {
@@ -25,43 +24,6 @@ int free_all(t_stack *a, t_stack *b, int check)
     if(check == -1)
     	printf("Error\n");
     return (0);
-}
-
-
-int	ft_isdigit(int c)
-{
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
-}
-
-long	ft_atoi(char *str)
-{
-	int		i;
-	int		sign;
-	long    result;
-
-	i = 0;
-	sign = 1;
-	result = 0;
-    	if(!str || str[0] == '\0')
-        	return (LONG_MAX);
-	if (str[i] == '-')
-	{
-		sign = -1;
-		i++;
-	}
-	while (ft_isdigit(str[i]))
-	{
-		result *= 10;
-		result += str[i] - '0';
-		i++;
-	}
-    	if(str[i] != '\0' || result * -1 < INT_MIN)
-    		return(LONG_MAX);
-	else if (result * sign > INT_MAX)
-		return (LONG_MAX);
-	return (result * sign);
 }
 
 void        push_a(t_stack *a,t_node *node)
@@ -114,30 +76,31 @@ int	main(int argc, char **argv)
 	if(create_a(a,argv,argc-1) == -1)
         	return (free_all(a,b,-1));
 
-	pp(b,a);
-	pp(b,a);
-	pp(b,a);
-	ss(b,a);
+	//pp(b,a);
+	//pp(b,a);
+	//pp(b,a);
+	//ss(b,a);
 	//swap(a);
+	rrr(a,b);
 	t_node *temp = a->head;
      	while (temp)
      	{
-        	 printf("stack a values: %d\n",temp->value);
+        	 ft_printf("stack a values: %d\n",temp->value);
         	 temp = temp->next;
 	}
 	temp = b->head;
      	while (temp)
      	{
-        	 printf("stack a values: %d\n",temp->value);
+        	 ft_printf("stack b values: %d\n",temp->value);
         	 temp = temp->next;
 	}
 
 	//ss(a,b);
 
 	//if(a->tail != NULL)
-   		printf("size %d\n",a->size);
+   		ft_printf("size a %d\n",a->size);
 	//if(a->head != NULL)
-		printf("size %d",b->size);
+		ft_printf("size b %d",b->size);
     //free(a);
     //free(b);
     free_all(a,b,1);

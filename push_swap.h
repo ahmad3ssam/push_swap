@@ -1,6 +1,7 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
-// # include "libft\libft.h"
+# include "libft/libft.h"
+# include "ft_printf/print/ft_printf.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
@@ -21,5 +22,8 @@ typedef struct s_stack
 void	pp(t_stack *dest, t_stack *src);
 void	ss(t_stack *a, t_stack *b);
 void	swap(t_stack *stack);
-
+void	rotate(t_stack *stack);
+void	rr(t_stack *a, t_stack *b);
+void	rrotate(t_stack *stack);
+void	rrr(t_stack *a, t_stack *b);
 #endif
