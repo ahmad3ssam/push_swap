@@ -15,14 +15,12 @@
 int	ft_putaddr(void *p)
 {
 	int			count;
-	uintptr_t	addr;
 
 	if (!p)
 	{
 		ft_putstr("(nil)");
 		return (5);
 	}
-	addr = (uintptr_t)p;
 	count = 2;
 	write(1, "0x", 2);
 	ft_convert_to_hexa_add((uintptr_t)p, 39, &count);
